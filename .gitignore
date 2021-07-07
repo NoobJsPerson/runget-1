@@ -1,0 +1,12 @@
+*.code-workspace
+.vscode/
+
+venv/
+
+__pycache__/
+.mypy_cache/
+
+config.json
+settings.json
+
+*.log
