@@ -11,9 +11,9 @@ class Admin(commands.Cog):
 
     @commands.command()
     @commands.is_owner()
-    async def logs(self, ctx: commands.Context):
+    async def logs(self, ctx: commands.Context) -> None:
         """
-        Sends the log file
+        Send the log file
         """
 
         file = discord.File("discord.log")
@@ -21,9 +21,9 @@ class Admin(commands.Cog):
 
     @commands.command(aliases=["exit", "forcequit"])
     @commands.is_owner()
-    async def forceexit(self, ctx: commands.Context):
+    async def forceexit(self, ctx: commands.Context) -> None:
         """
-        Closes the bot
+        Close the bot
         """
 
         self.bot.logger.info("force-exiting")
@@ -31,9 +31,9 @@ class Admin(commands.Cog):
 
     @commands.command()
     @commands.is_owner()
-    async def pull(self, ctx: commands.Context):
+    async def pull(self, ctx: commands.Context) -> None:
         """
-        Pulls from git
+        Pull updates from git
         """
 
         g = git.cmd.Git(os.getcwd())
@@ -44,18 +44,18 @@ class Admin(commands.Cog):
 
     @commands.command()
     @commands.is_owner()
-    async def echo(self, ctx: commands.Context, *, message: str):
+    async def echo(self, ctx: commands.Context, *, message: str) -> None:
         """
-        Echos a message back.
+        Echo a message back
         """
 
         await self.bot.send_pretty(ctx, message)
 
     @commands.command(name="reload", usage="<extension>")
     @commands.is_owner()
-    async def _reload(self, ctx: commands.Context, ext: str):
+    async def _reload(self, ctx: commands.Context, ext: str) -> None:
         """
-        Reloads an extension
+        Reload an extension
         """
 
         try:
@@ -66,9 +66,9 @@ class Admin(commands.Cog):
 
     @commands.command(name="load", usage="<extension>")
     @commands.is_owner()
-    async def _load(self, ctx: commands.Context, ext: str):
+    async def _load(self, ctx: commands.Context, ext: str) -> None:
         """
-        Loads an extension
+        Load an extension
         """
 
         try:
@@ -79,9 +79,9 @@ class Admin(commands.Cog):
 
     @commands.command(name="unload", usage="<extension>")
     @commands.is_owner()
-    async def _unload(self, ctx: commands.Context, ext: str):
+    async def _unload(self, ctx: commands.Context, ext: str) -> None:
         """
-        Unloads an extension
+        Unload an extension
         """
         try:
             self.bot.unload_extension(f"cogs.{ext}")
@@ -90,5 +90,5 @@ class Admin(commands.Cog):
             await self.bot.send_pretty(ctx, f"```\n{e}\n```")
 
 
-def setup(bot: commands.Bot):
+def setup(bot: commands.Bot) -> None:
     bot.add_cog(Admin(bot))

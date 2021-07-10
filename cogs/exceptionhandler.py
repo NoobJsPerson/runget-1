@@ -48,5 +48,5 @@ class ExceptionHandler(commands.Cog):
             self.bot.logger.exception(exception)
 
 
-def setup(bot: commands.Bot):
+def setup(bot: commands.Bot) -> None:
     bot.add_cog(ExceptionHandler(bot))
