@@ -27,7 +27,7 @@ class SrcBot(commands.Bot):
             self.settings = json.load(f)
 
         activity = discord.Activity(
-            name=f"for new runs | {self.settings.get('prefixes')[0]}help",
+            name=f"for new runs | {self.settings['prefixes'][0]}help",
             type=discord.ActivityType.watching,
         )
 
