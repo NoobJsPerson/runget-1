@@ -17,7 +17,7 @@ extensions = [
 
 
 def get_prefix(bot: commands.Bot, message: discord.Message) -> List[str]:
-    return commands.when_mentioned_or(*bot.settings.get("prefixes"))(bot, message)
+    return commands.when_mentioned_or(*bot.settings["prefixes"])(bot, message)
 
 
 class SrcBot(commands.Bot):
@@ -44,7 +44,7 @@ class SrcBot(commands.Bot):
         self.uptime = datetime.datetime.utcnow()
 
         activity = discord.Activity(
-            name=f"for new runs | {self.settings.get('prefixes')[0]}help",
+            name=f"for new runs | {self.settings['prefixes'][0]}help",
             type=discord.ActivityType.watching,
         )
         status = discord.Status.online
@@ -66,7 +66,7 @@ class SrcBot(commands.Bot):
         await self.process_commands(message)
 
     def run(self) -> None:
-        super().run(self.config.get("token"), reconnect=True)
+        super().run(self.config["token"], reconnect=True)
 
     async def send_pretty(self, ctx: commands.Context, content: str) -> discord.Message:
         embed = discord.Embed(description=content)
