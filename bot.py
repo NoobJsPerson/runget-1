@@ -22,6 +22,10 @@ def get_prefix(bot: commands.Bot, message: discord.Message) -> List[str]:
 
 class SrcBot(commands.Bot):
     def __init__(self) -> None:
+        activity = discord.Activity(
+            name=f"for new runs | {self.settings.get('prefixes')[0]}help",
+            type=discord.ActivityType.watching,
+        )
         super().__init__(
             command_prefix=get_prefix,
             case_insensitive=True,
@@ -29,6 +33,8 @@ class SrcBot(commands.Bot):
                 everyone=False, roles=False, users=True
             ),
             intents=discord.Intents.all(),
+            activity=activity,
+            status=discord.Status.online,
         )
 
         self.logger = logging.getLogger("discord")
@@ -41,18 +47,8 @@ class SrcBot(commands.Bot):
             self.settings = json.load(f)
 
     async def on_ready(self) -> None:
-        self.uptime = datetime.datetime.utcnow()
-
-        activity = discord.Activity(
-            name=f"for new runs | {self.settings.get('prefixes')[0]}help",
-            type=discord.ActivityType.watching,
-        )
-        status = discord.Status.online
-        await self.change_presence(activity=activity, status=status)
-
-        for extension in extensions:
-            self.load_extension(extension)
-            self.logger.info(f"loaded extension {extension}")
+        if not hasattr(self, "uptime"):
+            self.uptime = datetime.datetime.utcnow()
 
         self.logger.info(
             f"running as {self.user} (id = {self.user.id}), "
@@ -66,6 +62,10 @@ class SrcBot(commands.Bot):
         await self.process_commands(message)
 
     def run(self) -> None:
+        for extension in extensions:
+            self.load_extension(extension)
+            self.logger.info(f"loaded extension {extension}")
+
         super().run(self.config.get("token"), reconnect=True)
 
     async def send_pretty(self, ctx: commands.Context, content: str) -> discord.Message:
