@@ -22,10 +22,15 @@ def get_prefix(bot: commands.Bot, message: discord.Message) -> List[str]:
 
 class SrcBot(commands.Bot):
     def __init__(self) -> None:
+        
+        with open("settings.json", "r") as f:
+            self.settings = json.load(f)
+
         activity = discord.Activity(
             name=f"for new runs | {self.settings.get('prefixes')[0]}help",
             type=discord.ActivityType.watching,
         )
+
         super().__init__(
             command_prefix=get_prefix,
             case_insensitive=True,
@@ -42,9 +47,6 @@ class SrcBot(commands.Bot):
 
         with open("config.json", "r") as f:
             self.config = json.load(f)
-
-        with open("settings.json", "r") as f:
-            self.settings = json.load(f)
 
     async def on_ready(self) -> None:
         if not hasattr(self, "uptime"):
