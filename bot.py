@@ -17,7 +17,7 @@ extensions = [
 
 
 def get_prefix(bot: commands.Bot, message: discord.Message) -> List[str]:
-    return commands.when_mentioned_or(*bot.settings.get("prefixes"))(bot, message)
+    return commands.when_mentioned_or(*bot.settings["prefixes"])(bot, message)
 
 
 class SrcBot(commands.Bot):
@@ -68,7 +68,7 @@ class SrcBot(commands.Bot):
             self.load_extension(extension)
             self.logger.info(f"loaded extension {extension}")
 
-        super().run(self.config.get("token"), reconnect=True)
+        super().run(self.config["token"], reconnect=True)
 
     async def send_pretty(self, ctx: commands.Context, content: str) -> discord.Message:
         embed = discord.Embed(description=content)
