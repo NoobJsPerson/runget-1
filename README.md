@@ -2,6 +2,7 @@
 RunGet is a discord bot that posts recent verified runs from Speedrun.com 
 # How to setup the bot
 #### ⚠️ Warning: You need to have python and git installed
+If you don't have them you can install them using the commands/links right here ￬
 #### Linux:
 - Debian and Debian based distros (Ubuntu, Kubuntu, Pop_!OS...):
 `apt install python git`
