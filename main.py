@@ -42,8 +42,11 @@ def check_settings(filename: str) -> None:
         with open(filename, "r") as f:
             f.read()
     except FileNotFoundError:
+        prefix = input("enter a space-seperated list of prefixes you want to use: ")
+        prefixes = prefix.split()
+
         with open(filename, "w+") as f:
-            json.dump({"prefixes": []}, f, indent=4)
+            json.dump({"prefixes": prefixes}, f, indent=4)
 
 
 def check_jsons() -> None:
