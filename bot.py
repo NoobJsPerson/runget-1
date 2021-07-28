@@ -6,7 +6,8 @@ from typing import List
 import aiohttp
 import discord
 from discord.ext import commands
-from run import get_new_runs
+
+# from run import get_new_runs
 
 extensions = ["cogs.admin", "cogs.exceptionhandler"]
 
@@ -50,7 +51,7 @@ class SrcBot(commands.Bot):
             f"running as {self.user} (id = {self.user.id}), "
             f"on {discord.__name__} v{discord.__version__}"
         )
-        await get_new_runs(self)
+        # await get_new_runs(self)
 
     async def on_message(self, message: discord.Message) -> None:
         if message.author.bot:
