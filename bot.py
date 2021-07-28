@@ -22,7 +22,6 @@ def get_prefix(bot: commands.Bot, message: discord.Message) -> List[str]:
 
 class SrcBot(commands.Bot):
     def __init__(self) -> None:
-        
         with open("settings.json", "r") as f:
             self.settings = json.load(f)
 
