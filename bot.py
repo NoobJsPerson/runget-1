@@ -7,9 +7,8 @@ import aiohttp
 import discord
 from discord.ext import commands
 
-# from run import get_new_runs
 
-extensions = ["cogs.admin", "cogs.exceptionhandler"]
+extensions = ["cogs.admin", "cogs.exceptionhandler", "cogs.gamelist"]
 
 
 def get_prefix(bot: commands.Bot, message: discord.Message) -> List[str]:
@@ -39,7 +38,7 @@ class SrcBot(commands.Bot):
             activity=activity,
             status=discord.Status.online,
         )
-        self.oldruns = {}
+
         self.logger = logging.getLogger("discord")
         self.session = aiohttp.ClientSession()
 
@@ -51,7 +50,6 @@ class SrcBot(commands.Bot):
             f"running as {self.user} (id = {self.user.id}), "
             f"on {discord.__name__} v{discord.__version__}"
         )
-        # await get_new_runs(self)
 
     async def on_message(self, message: discord.Message) -> None:
         if message.author.bot:

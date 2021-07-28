@@ -49,9 +49,19 @@ def check_settings(filename: str) -> None:
             json.dump({"prefixes": prefixes}, f, indent=4)
 
 
+def check_gamedb(filename: str) -> None:
+    try:
+        with open(filename, "r") as f:
+            f.read()
+    except FileNotFoundError:
+        with open(filename, "w+") as f:
+            json.dump({"guilds": {}}, f, indent=4)
+
+
 def check_jsons() -> None:
     check_config("config.json")
     check_settings("settings.json")
+    check_gamedb("gamedb.json")
 
 
 def run_bot() -> None:

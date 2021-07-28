@@ -8,5 +8,6 @@ __pycache__/
 
 config.json
 settings.json
+gamedb.json
 
 *.log
