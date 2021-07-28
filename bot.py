@@ -7,13 +7,7 @@ import aiohttp
 import discord
 from discord.ext import commands
 
-extensions = [
-    "cogs.admin",
-    "cogs.exceptionhandler",
-    # "cogs.general",
-    # "cogs.utils",
-    # "cogs.logs",
-]
+extensions = ["cogs.admin", "cogs.exceptionhandler"]
 
 
 def get_prefix(bot: commands.Bot, message: discord.Message) -> List[str]:
