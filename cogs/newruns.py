@@ -1,6 +1,5 @@
-import json
+import asyncio
 
-import discord
 from discord.ext import commands
 
 
@@ -8,20 +7,20 @@ class NewRuns(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    def addgame(
-        self, ctx: commands.Context, abbreviation: str, channel: discord.TextChannel
-    ) -> None:
-        """
-        Add a new game
-        """
+    async def get_new_runs(self) -> None:
+        async with self.bot.session.get(
+            "https://www.speedrun.com/api/v1/runs",
+            params={
+                "status": "verified",
+                "orderby": "verify-date",
+                "direction": "desc",
+            },
+        ) as response:
+            runsdata = response.json()
+            # TODO handle new runs
 
-        with open("gamedb.json") as f:
-            gamedb = json.load(f)
-
-        if ctx.guild.id not in gamedb:
-            gamedb["guilds"][str(ctx.guild.id)] = {"games": []}
-
-        # TODO: do stuff
+        await asyncio.sleep(300)
+        await self.get_new_runs()
 
 
 def setup(bot: commands.Bot):
