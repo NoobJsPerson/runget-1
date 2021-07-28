@@ -1,8 +1,6 @@
-import os
 import traceback
 
 import discord
-import git
 from discord.ext import commands
 
 

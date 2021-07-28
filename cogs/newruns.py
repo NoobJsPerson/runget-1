@@ -1,5 +1,4 @@
 import json
-from typing import Dict, List
 
 import discord
 from discord.ext import commands
