@@ -16,6 +16,9 @@ def get_prefix(bot: commands.Bot, message: discord.Message) -> List[str]:
 
 class SrcBot(commands.Bot):
     def __init__(self) -> None:
+        with open("config.json", "r") as f:
+            self.config = json.load(f)
+
         with open("settings.json", "r") as f:
             self.settings = json.load(f)
 
@@ -37,9 +40,6 @@ class SrcBot(commands.Bot):
 
         self.logger = logging.getLogger("discord")
         self.session = aiohttp.ClientSession()
-
-        with open("config.json", "r") as f:
-            self.config = json.load(f)
 
     async def on_ready(self) -> None:
         if not hasattr(self, "uptime"):
