@@ -43,3 +43,9 @@ $ python3 main.py
 ```sh
 $ py main.py
 ```
+
+### Termux (Android)
+
+```sh
+$ python main.py
+```
